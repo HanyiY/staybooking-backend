@@ -57,7 +57,8 @@ src/main/java/com/liaoffer/staybooking
 - Emphasis on correctness, maintainability, and readable domain logic
 - Scoped to demonstrate production-style backend thinking rather than full feature coverage
 - Verified end-to-end functionality using Docker-based local setup with PostgreSQL
-- designed to be deployment-ready, with configuration externalized to support local and cloud environments
+- Deployed to Google Cloud Run with Java 21 runtime.
+
 
 
 ## Why I built this

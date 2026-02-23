@@ -1,6 +1,7 @@
 package com.laioffer.staybooking;
 
 
+import com.laioffer.staybooking.authentication.UserAlreadyExistException;
 import com.laioffer.staybooking.booking.DeleteBookingNotAllowedException;
 import com.laioffer.staybooking.booking.InvalidBookingException;
 import com.laioffer.staybooking.booking.ListingBookingsNotAllowedException;
@@ -80,6 +81,15 @@ public class GlobalControllerExceptionHandler {
         return new ResponseEntity<>(new ErrorResponse(
                 "Required request parameter is missing",
                 "missing_request_parameter"),
+                HttpStatus.BAD_REQUEST);
+    }
+
+
+    @ExceptionHandler(UserAlreadyExistException.class)
+    public final ResponseEntity<ErrorResponse> handleException(UserAlreadyExistException e) {
+        return new ResponseEntity<>(new ErrorResponse(
+                e.getMessage(),
+                "user_already_exists"),
                 HttpStatus.BAD_REQUEST);
     }
 }
