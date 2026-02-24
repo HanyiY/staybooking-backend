@@ -25,6 +25,6 @@ staybooking:
   gcs:
     bucket: staybookinghy-bucket-hy
   jwt:
-    secret-key: hYW3L6I3gPpEUbtU+17FEHRYJuc8uLYHaLLsuzzyKn4=
+    secret-key: ${STAYBOOKING_JWT_SECRET_KEY:}
   geocoding:
-    key: AIzaSyCU2K1kJXW646tqwcHbqQQU-gWrG64oJ4M
+    key: ${STAYBOOKING_GEOCODING_KEY:}
