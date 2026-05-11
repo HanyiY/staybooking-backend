@@ -1,0 +1,45 @@
+name: CI
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 21
+        uses: actions/setup-java@v4
+        with:
+          java-version: '21'
+          distribution: 'temurin'
+
+      - name: Cache Gradle packages
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle-
+
+      - name: Build (skip tests)
+        run: ./gradlew build -x test
+
+      # To enable integration tests, you need to:
+      # 1. Add GCP_CREDENTIALS secret (base64-encoded credentials.json) in repo settings
+      # 2. Uncomment the block below
+      #
+      # - name: Write GCP credentials
+      #   run: echo "${{ secrets.GCP_CREDENTIALS }}" | base64 -d > src/main/resources/credentials.json
+      #
+      # - name: Build and test
+      #   services:
+      #     (see README for service container setup)
