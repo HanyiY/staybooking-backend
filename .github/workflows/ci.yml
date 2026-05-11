@@ -31,7 +31,9 @@ jobs:
             ${{ runner.os }}-gradle-
 
       - name: Build (skip tests)
-        run: ./gradlew build -x test
+        run: |
+          chmod +x gradlew
+          ./gradlew build -x test
 
       # To enable integration tests, you need to:
       # 1. Add GCP_CREDENTIALS secret (base64-encoded credentials.json) in repo settings
